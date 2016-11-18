@@ -1,9 +1,11 @@
+---
 services:
   - docker
 
-before_script:
+before_install:
   - cd docker
-  - docker-compose -v
+  - docker-compose -A
+
 install:
   - docker-compose up -d
 
