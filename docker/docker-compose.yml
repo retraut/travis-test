@@ -1,0 +1,36 @@
+mysql:
+    image: mysql:5.6.34
+    environment:
+        - MYSQL_ROOT_PASSWORD=92810b70fc31d434368b7b293546fc0b8becb9e5
+    ports:
+        - "127.0.0.1:3306:3306"
+
+    volumes:
+        - /var/lib/mysql:/var/lib/mysql/:rw
+
+adminer:
+    image: activatedgeek/adminer:latest
+    ports:
+        - "1284:80"
+    links:
+        - mysql
+
+web:
+    build: docker/httpd
+    volumes:
+        - ./docker/httpd/httpd.conf:/etc/httpd/conf/httpd.conf:ro
+        - ./docker/httpd/vhosts.conf:/etc/httpd/conf.d/vhosts.conf:ro
+        - ./docker/httpd/php.ini:/etc/php.ini:ro
+        - /var/www:/var/www:rw
+    links:
+        - mysql
+
+nginx:
+    image: nginx:latest
+    ports:
+        - "80:80"
+    volumes:
+        - ./docker/nginx/:/etc/nginx:ro
+    links: 
+        - web
+

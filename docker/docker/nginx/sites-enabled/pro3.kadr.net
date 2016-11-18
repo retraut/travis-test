@@ -1,0 +1,8 @@
+server {
+	listen 80;
+	server_name    pro.kadr.net pro3.kadr.net;
+	location / {
+		proxy_pass      http://web:80;
+	}
+}
+

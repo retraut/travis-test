@@ -1,0 +1,22 @@
+Before run docker-compose up -d, need to create user and group
+
+!!!! ATTENTION !!!!
+Create new dev user on Centos or Ubuntu server
+www group guid - 1111
+dev user uid - 1111
+!!!!!
+DEV must be primary member of www group!
+
+Basic usage:
+clone repo with docker
+init submodule (WIP)
+deploy site from submodule
+run - docker-compose up -d
+
+docker images used in docker-compose
+mysql:5.6.34 - official mysql image based on (forgot)
+adminer:latest - docker hub image based on alpine
+web - our custom httpd build based on Centos 6 
+nginx - official nginx image based in debian (I think)
+
+

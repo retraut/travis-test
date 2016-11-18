@@ -1,12 +1,13 @@
 services:
   - docker
 
+before_script:
+  - cd docker
+  - docker-compose -v
 install:
-  - docker build -t web:latest .
-  - docker run -d -p 127.0.0.1:80:80 --name web web
+  - docker-compose up -d
 
 script:
-  - docker ps | grep -q web
+  - docker ps 
   - ss -antps | grep 127.0.0.1:80 | grep LISTEN
-  - docker exec web composer --version
-  - docker exec web rpm -qa | grep php
+  - ss -antps | grep 127.0.0.1:3306 | grep LISTEN
