@@ -1,0 +1,11 @@
+services:
+  - docker
+
+install:
+  - docker build -t web:latest .
+  - docker run -d -p 127.0.0.1:80:80 --name web web
+
+script:
+  - docker ps | grep -q web
+  - ss -antps | grep 127.0.0.1:80 | grep LISTEN
+  - docker exec web composer --version
